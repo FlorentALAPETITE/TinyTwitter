@@ -1,0 +1,126 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://tinytwitter-189016.appspot.com/_ah/api",
+  "name" : "tinyTwitterEndpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://tinytwitter-189016.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "TinyTwitter.com",
+  "ownerName" : "TinyTwitter.com",
+  "packagePath" : "services",
+  "methods" : {
+    "tinyTwitterEndpoint.insertNewMessage" : {
+      "path" : "messageentity/{message}/{userId}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewMessage",
+      "request" : {
+        "parameters" : {
+          "message" : {
+            "type" : "string",
+            "required" : true
+          },
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.insertNewUser" : {
+      "path" : "userentity/{username}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewUser",
+      "request" : {
+        "parameters" : {
+          "username" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "MessageEntity" : {
+        "id" : "MessageEntity",
+        "type" : "object",
+        "properties" : {
+          "idMessage" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "string"
+          },
+          "user" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "UserEntity" : {
+        "id" : "UserEntity",
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "tinyTwitterAPI.TinyTwitterREST.insertNewMessage" : {
+        "response" : {
+          "$ref" : "MessageEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.insertNewUser" : {
+        "response" : {
+          "$ref" : "UserEntity"
+        }
+      }
+    }
+  }
+}
