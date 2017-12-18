@@ -5,6 +5,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.Unique;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -14,9 +15,12 @@ public class UserEntity {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY) Long idUser;
 	
-	@Persistent String username;
+	@Unique @Persistent String username;
 	
-	@Persistent Set<Long> follows = new HashSet<Long>();
+	//@Persistent Set<Long> follows = new HashSet<Long>();
+	
+	@Persistent Set<Long> followers = new HashSet<Long>();
+	
 	
 	public UserEntity() {}
 	
@@ -42,11 +46,28 @@ public class UserEntity {
 		username = n;
 	}
 	
-	public void addFollow(Long follow) {
-		follows.add(follow);
+//	public void addFollow(Long follow) {
+//		follows.add(follow);
+//	}
+//	
+//	public Set<Long> getFollows(){
+//		return follows;
+//	}
+//	
+//	public void removeFollow(Long follow) {
+//		follows.remove(follow);
+//	}
+//	
+	
+	public void addFollower(Long follower) {
+		followers.add(follower);
 	}
 	
-	public void removeFollow(Long follow) {
-		follows.remove(follow);
+	public Set<Long> getFollowers(){
+		return followers;
+	}
+	
+	public void removeFollower(Long follower) {
+		followers.remove(follower);
 	}
 }

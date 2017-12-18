@@ -4,18 +4,21 @@ import java.sql.Timestamp;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Index;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
 public class MessageEntity {
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY) Long idMessage;
+	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY) Key idMessage;
 	
 	@Persistent String message;
-	@Persistent Long userId;
-	@Persistent String timestamp;
+	@Index @Persistent Long userId;
+	@Index @Persistent String timestamp;
 	
 	public MessageEntity() {}
 	
@@ -28,11 +31,11 @@ public class MessageEntity {
 		this.idMessage = null;
 	}
 	
-	public Long getIdMessage() {
+	public Key getIdMessage() {
 		return idMessage;
 	}
 	
-	public void setIdMessage(Long id) {
+	public void setIdMessage(Key id) {
 		idMessage = id;
 	}
 	
