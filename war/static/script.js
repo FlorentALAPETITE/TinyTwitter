@@ -1,6 +1,6 @@
 var user;
-var app = angular.module('twitt', []).controller('TTController', ['$scope', '$window',
-  function($scope, $window) {
+var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$cookieStore','$scope', '$window',
+  function($cookieStore, $scope, $window) {
     $scope.messages = [{
       id: '0',
       author: "Billy",
@@ -18,6 +18,10 @@ var app = angular.module('twitt', []).controller('TTController', ['$scope', '$wi
     $scope.spwd_conf_reg;
     
     $scope.stext;
+    
+    
+    console.log("HERE 2 : "+$cookieStore.get('userId'));
+    $scope.userId = $cookieStore.get('userId');
   
     $scope.login = function(){
         gapi.client.tinyTwitterEndpoint.connectUser({
@@ -26,6 +30,9 @@ var app = angular.module('twitt', []).controller('TTController', ['$scope', '$wi
           function(resp){
             if(resp.id){
               var userId = resp.id; //FAIRE UNE SESSION
+              $cookieStore.put('userId',resp.id);
+              $scope.userId = $cookieStore.get('userId');
+              console.log("HERE 1 : "+$cookieStore.get('userId'));
               var url = document.URL;
               var host = url.substring(0,url.lastIndexOf("/"));
               var landingUrl = host + "/timeline.html";
