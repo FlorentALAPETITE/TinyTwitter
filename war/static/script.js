@@ -20,6 +20,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     $scope.stext;
     
     $scope.userId = $cookies.userId;
+    $scope.username = $cookies.username;
 
 	$scope.redirect = function(template){
 		var url = document.URL;
@@ -36,8 +37,8 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
             if(resp.id){
               $scope.redirect('/timeline.html');
 
-              $cookies.userId = resp.id;
-              $scope.userId = $cookies.userId;
+              $scope.userId = $cookies.userId = resp.id;
+              $scope.username = $cookies.username = resp.username;
 			  $scope.$apply();
             }else{
               document.getElementById('form-error').textContent = "Cet identifiant n'existe pas."
@@ -53,8 +54,8 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
             if(resp.id){
               $scope.redirect('/timeline.html');
 
-              $cookies.userId = resp.id;
-              $scope.userId = $cookies.userId;
+              $scope.userId = $cookies.userId = resp.id;
+              $scope.username = $cookies.username = resp.username;
 			  $scope.$apply();
             }else{
               document.getElementById('form-error').textContent = "Quelque chose est incorect."
