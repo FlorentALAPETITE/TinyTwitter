@@ -20,6 +20,13 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     $scope.stext;
     
     $scope.userId = $cookies.userId;
+
+	$scope.redirect = function(template){
+		var url = document.URL;
+		var host = url.substring(0,url.lastIndexOf("/"));
+		var landingUrl = host + template;
+		$window.location.href = landingUrl;
+	}
   
     $scope.login = function(){
         gapi.client.tinyTwitterEndpoint.connectUser({
@@ -27,17 +34,13 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
         }).execute(
           function(resp){
             if(resp.id){
-              //alert($cookieStore.get('userId'));
-              var url = document.URL;
-              var host = url.substring(0,url.lastIndexOf("/"));
-              var landingUrl = host + "/timeline.html";
-              $window.location.href = landingUrl;
+              $scope.redirect('/timeline.html');
 
               $cookies.userId = resp.id;
               $scope.userId = $cookies.userId;
 			  $scope.$apply();
             }else{
-              alert("Incorrect username");
+              document.getElementById('form-error').textContent = "Cet identifiant n'existe pas."
             }
           });
     }
@@ -47,11 +50,15 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
          username: $scope.slogin_reg
        }).execute(
          function(resp){
-           //FAIRE UNE SESSION OU REDIRIGER VERS LOGIN (Mieux)
-          var url = document.URL;
-          var host = url.substring(0,url.lastIndexOf("/"));
-          var landingUrl = host + "/timeline.html";
-          $window.location.href = landingUrl;
+            if(resp.id){
+              $scope.redirect('/timeline.html');
+
+              $cookies.userId = resp.id;
+              $scope.userId = $cookies.userId;
+			  $scope.$apply();
+            }else{
+              document.getElementById('form-error').textContent = "Quelque chose est incorect."
+            }
          });
     }
     
