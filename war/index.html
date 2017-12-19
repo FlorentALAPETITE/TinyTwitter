@@ -30,7 +30,7 @@
     </div>
   </div>
   
-  <div class="registerForm" style="display:block">
+  <div class="registerForm" style="display:none">
     <form ng-submit="register()">
       <div class="form-row justify-content-md-center">
         <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-4">
@@ -42,7 +42,7 @@
       </div>
     </form>
     <div class="register_div">
-      <a class="register_link" href="#">Se connecter</a>
+      <a class="register_link" href="javascript:;" onclick="toggleRegister();">Se connecter</a>
     </div>
   </div>
   <div class="form-row justify-content-md-center">
@@ -61,13 +61,21 @@
 
 <script>
   function toggleRegister(){
-    alert("ho");
-    var x = $(".registerForm");
-    alert(x);
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
+    var x = document.getElementsByClassName("registerForm");
+    for(var i = 0; i < x.length; i++) {
+         if (x[i].style.display === "none") {
+              x[i].style.display = "block";
+          } else {
+              x[i].style.display = "none";
+          }
+    }
+    var y = document.getElementsByClassName("logForm");
+    for(var i = 0; i < y.length; i++) {
+         if (y[i].style.display === "none") {
+              y[i].style.display = "block";
+          } else {
+              y[i].style.display = "none";
+          }
     }
   }
 </script>

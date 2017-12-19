@@ -13,7 +13,7 @@
 
 
 <body ng-controller="TTController">
-  <h1 class="my-5">TinyTwitt</h1>
+  <h1 class="my-5"><a href="/index.html" style="text-decoration: none; color: black;">TinyTwitt</a></h1>
   
   <p class="text-center">You are logged as {{username}}</p>
 
@@ -36,8 +36,8 @@
       
       <ul>
         <li ng-repeat="x in messages" class="card mb-1">
-          <div class="card-header text-muted">{{x.author}}</div>
-          <div class="card-body">{{x.text}}</div>
+          <div class="card-header text-muted">{{x.idMessage.parent.id}}</div>
+          <div class="card-body">{{x.message}}</div>
         </li>
       </ul>
     </div>

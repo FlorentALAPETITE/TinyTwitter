@@ -65,9 +65,9 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     
     $scope.postMessage = function(){
        gapi.client.tinyTwitterEndpoint.insertNewMessage({
-         id: "Auto increment ??",
-         author: $scope.sname,
-         text: $scope.stext
+         message: $scope.stext,
+         userId: $cookies.userId,
+         username: $cookies.username
        }).execute(
          function(resp){
            $scope.listMessages();
@@ -77,7 +77,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     
     $scope.listMessages = function(){
       gapi.client.tinyTwitterEndpoint.getTimeline({
-        userId: "0",
+        userId: $cookies.userId,
         messageLimit: "5"
       }).execute(
         function(resp){
