@@ -52,15 +52,6 @@ public class TinyTwitterREST {
 		for (MessageIndexEntity msgIndexEntity : userIndexes)
 			results.add(msgIndexEntity.getMessage());
 		
-//		// Tri messages par timestamp
-//		Collections.sort(results, new Comparator<MessageEntity>() {
-//	        @Override
-//	        public int compare(MessageEntity message1, MessageEntity message2)
-//	        {
-//
-//	            return  message2.timestamp.compareTo(message1.timestamp);
-//	        }
-//	    });
 				
 		return results;
 	}
@@ -77,8 +68,8 @@ public class TinyTwitterREST {
 	
 	// Ajoute un nouveau message dans le datastore
 	@ApiMethod(name = "insertNewMessage")
-	public MessageEntity insertNewMessage(@Named("message") String message, @Named("userId") Long userId) {
-		MessageEntity me = new MessageEntity(message);
+	public MessageEntity insertNewMessage(@Named("message") String message, @Named("userId") Long userId, @Named("username") String username) {
+		MessageEntity me = new MessageEntity(message, userId, username);
 		PersistenceManager mgr = getPersistenceManager();
 				
 		UserEntity e = mgr.getObjectById(UserEntity.class,userId);
