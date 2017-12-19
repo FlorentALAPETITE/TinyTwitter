@@ -16,17 +16,13 @@ public class MessageEntity {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY) Key idMessage;
 	
-	@Persistent String message;
-	@Index @Persistent Long userId;
-	@Index @Persistent String timestamp;
+	@Persistent String message;		
+	
 	
 	public MessageEntity() {}
 	
-	public MessageEntity(String message, Long userId) {
-		this.message=message;
-		this.userId=userId;
-		
-		timestamp = new Timestamp(System.currentTimeMillis()).toString();
+	public MessageEntity(String message) {
+		this.message=message;		
 		
 		this.idMessage = null;
 	}
@@ -47,22 +43,7 @@ public class MessageEntity {
 	public void setMessage(String m) {
 		message=m;
 	}
+		
 	
 	
-	public Long getUser(){
-		return userId;
-	}
-	
-	public void setUser(Long k) {
-		userId=k;
-	}
-	
-	
-	public void setTimestamp(String t) {
-		timestamp = t;
-	}
-	
-	public String getTimestamp() {
-		return timestamp;
-	}
 }

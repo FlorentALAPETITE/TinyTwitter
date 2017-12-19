@@ -2,6 +2,7 @@ package tinyTwitterAPI;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Index;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -11,13 +12,12 @@ import java.util.Set;
 import java.util.HashSet;
 
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
+@Unique(name="Unique_Username", members={"username"})
 public class UserEntity {	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY) Long idUser;
 	
-	@Unique @Persistent String username;
-	
-	//@Persistent Set<Long> follows = new HashSet<Long>();
+	@Index @Persistent String username;
 	
 	@Persistent Set<Long> followers = new HashSet<Long>();
 	
@@ -46,18 +46,6 @@ public class UserEntity {
 		username = n;
 	}
 	
-//	public void addFollow(Long follow) {
-//		follows.add(follow);
-//	}
-//	
-//	public Set<Long> getFollows(){
-//		return follows;
-//	}
-//	
-//	public void removeFollow(Long follow) {
-//		follows.remove(follow);
-//	}
-//	
 	
 	public void addFollower(Long follower) {
 		followers.add(follower);
