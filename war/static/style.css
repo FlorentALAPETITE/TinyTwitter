@@ -1,0 +1,33 @@
+body {
+	font-family: 'Quicksand', sans-serif;
+}
+
+input{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+input[type="submit"]{
+	cursor: pointer;
+}
+textarea {
+	resize: none;
+}
+
+ul{
+	list-style:none;
+	padding-left: 0;
+}
+
+
+h1{
+	text-align:center;
+}
+
+.logForm{
+	text-align:center;
+}
+
+.register_div{
+	text-align:right;
+}
