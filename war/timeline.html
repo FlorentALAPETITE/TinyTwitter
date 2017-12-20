@@ -44,13 +44,13 @@
   
   <div class="form-row justify-content-md-center">
     <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
-      <h2 class="my-3">{{timelineTitle}}</h2>
+      <h2 class="my-3">My timeline</h2>
       <p>Query executed in : {{execution_time_timeline}}ms</p>
       
       <ul>
         <li ng-repeat="x in messages" class="card mb-1">
           <div class="card-header text-muted">
-	          <span ng-click="listMessages(userId=x.userId, username=x.username)" style="cursor:pointer;" title="Voir les messages de {{x.username}}">{{x.username}}</span>
+	          <span>{{x.username}}</span>
 	      </div>
           <div class="card-body">{{x.message}}</div>
         </li>
