@@ -152,7 +152,7 @@ public class TinyTwitterREST {
 		}
 		
 		mgr.close();
-		return e;
+		return user;
 	}
 	
 	// Connecte le user défini par son username
@@ -207,8 +207,6 @@ public class TinyTwitterREST {
 			throw new Exception("Unable to follow : not enough users.");
 		}
 		else{				
-			Query query;
-			List<MessageIndexEntity> messageIndexEntities;
 			
 			for(UserEntity current : users){
 								
@@ -216,18 +214,8 @@ public class TinyTwitterREST {
 				
 				current.addFollowing(userId);		
 				
-				
-				// Rétroactivité du follow :		
-				query = mgr.newQuery(MessageIndexEntity.class);
-		
-				query.setFilter("userId == " + userId);
-		
-				messageIndexEntities = (List<MessageIndexEntity>) query.execute();
-				
-				for(MessageIndexEntity m : messageIndexEntities){
-					if(!m.containsReceiver(current.getId()))
-						m.addReceiver(current.getId());
-				}
+					
+				// On ne s'occupe pas de la rétroactivité pour optimiser le temps d'execution
 			}
 		}
 		
@@ -250,28 +238,16 @@ public class TinyTwitterREST {
 		if(users.size()!= (userRangeEnd-userRangeBegin)){
 			throw new Exception("Unable to follow : not enough users.");
 		}
-		else{				
-			Query query;
-			List<MessageIndexEntity> messageIndexEntities;
-			
+		else{						
+						
 			for(UserEntity current : users){
 								
 				current.addFollower(userId);
 				
 				e.addFollowing(current.getId());		
 				
+				// On ne s'occupe pas de la rétroactivité pour optimiser le temps d'execution
 				
-				// Rétroactivité du follow :		
-				query = mgr.newQuery(MessageIndexEntity.class);
-		
-				query.setFilter("userId == " + current.getId());
-		
-				messageIndexEntities = (List<MessageIndexEntity>) query.execute();
-				
-				for(MessageIndexEntity m : messageIndexEntities){
-					if(!m.containsReceiver(userId))
-						m.addReceiver(userId);
-				}
 			}
 		}
 		
