@@ -51,7 +51,11 @@
         <li ng-repeat="x in messages track by $index" class="card mb-1">
           <div class="card-header text-muted">
 	          <span>{{x.username}}</span>
+	          <span ng-if="x.userId == userId" class="btn btn-outline-secondary float-right">Vous</span>
+	          <button ng-if="x.userId != userId" class="btn btn-outline-success float-right">Followerer</button>
+	          <span ng-if="following.indexOf(x.userId) > -1" class="btn btn-success float-right">Followé</span>
 	      </div>
+
           <div class="card-body">{{x.message}}</div>
         </li>
       </ul>

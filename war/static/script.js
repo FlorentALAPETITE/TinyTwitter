@@ -2,10 +2,11 @@ var user;
 var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$scope', '$cookies', '$cookieStore', '$window',
   function($scope, $cookies, $cookieStore, $window) {
     $scope.messages = [];
-    $scope.nbmessages = 0;
     $scope.nbmessagestoadd = 5;
     $scope.slogin;
     $scope.spwd;
+
+    $scope.following = [];
     
     $scope.slogin_reg;
     $scope.spwd_reg;
@@ -79,7 +80,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
          function(resp){
            $scope.execution_time_post = (new Date().getTime()) - timeStart;
            $scope.stext = null;
-           $scope.listMessages($scope.nbmessages + 1, true);
+           $scope.listMessages($scope.messages.length + 1, true);
            $scope.$apply();
          });
     }
@@ -88,12 +89,11 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
       var timeStart = new Date().getTime();
       if (replace){
            $scope.messages = [];
-           $scope.nbmessages = 0;
       }
       gapi.client.tinyTwitterEndpoint.getTimeline({
         userId: $scope.userId,
-        messageLimitBegin: $scope.nbmessages,
-        messageLimitEnd: $scope.nbmessages += messageLimit
+        messageLimitBegin: $scope.messages.length,
+        messageLimitEnd: $scope.messages.length + parseInt(messageLimit)
       }).execute(
         function(resp){
           $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
@@ -103,16 +103,6 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
           	  document.getElementById('display-more-messages').style="display:none";
           }
         });
-    }
-
-    $scope.listUsers = function(){
-       gapi.client.tinyTwitterEndpoint.listUsers({
-         usersLimitBegin: $scope.users.length,
-         usersLimitEnd: $scope.users.length+10,
-       }).execute(
-         function(resp){
-            // add à scope users 
-         });
     }
 
     // little hack to be sure that apis.google.com/js/client.js is loaded
