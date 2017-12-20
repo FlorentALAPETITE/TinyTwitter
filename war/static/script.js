@@ -24,6 +24,9 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
 
     $scope.timelineTitle = "My timeline";
 
+    $scope.execution_time_timeline;
+    $scope.execution_time_post;
+
 	$scope.redirect = function(template){
 		var url = document.URL;
 		var host = url.substring(0,url.lastIndexOf("/"));
@@ -75,23 +78,28 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     }
     
     $scope.postMessage = function(){
+       var timeStart = new Date().getTime();
        gapi.client.tinyTwitterEndpoint.insertNewMessage({
          message: $scope.stext,
          userId: $cookies.userId,
          username: $cookies.username
        }).execute(
          function(resp){
+           $scope.execution_time_post = (new Date().getTime()) - timeStart;
+           $scope.stext = null;
            $scope.listMessages();
            $scope.apply();
          });
     }
     
     $scope.listMessages = function(userId=$scope.userId, username=$scope.username, messageLimit=5, replace=true){
+      var timeStart = new Date().getTime();
       gapi.client.tinyTwitterEndpoint.getTimeline({
         userId: userId,
         messageLimit: messageLimit
       }).execute(
         function(resp){
+          $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
         	if (replace){
         		// changement de timeline
           		$scope.messages = resp.items;

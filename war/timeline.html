@@ -34,10 +34,10 @@
     <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
       <h2>New Post</h2>
       <form ng-submit="postMessage()">
-      
         <textarea ng-model="stext" placeholder="Twitt something ..." rows="4" maxlength="140" class="form-control"></textarea>
-        <input class="btn btn-primary form-control" type="submit" value="post">
+        <input class="btn btn-primary form-control" type="submit" value="post" onclick="displayQueryTime();">
       </form>
+    <p id="query_time_post" style="display:none">Query executed in : {{execution_time_post}}ms</p>
     </div>
   </div>
   
@@ -45,6 +45,7 @@
   <div class="form-row justify-content-md-center">
     <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
       <h2 class="my-3">{{timelineTitle}}</h2>
+      <p>Query executed in : {{execution_time_timeline}}ms</p>
       
       <ul>
         <li ng-repeat="x in messages" class="card mb-1">
@@ -66,6 +67,14 @@
 </script>
 
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+
+<script>
+  function displayQueryTime(){
+    var x = document.getElementById("query_time_post");
+    x.style.display = "block";
+  }
+</script>
   
 
 </body>
