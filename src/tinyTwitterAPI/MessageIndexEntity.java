@@ -39,6 +39,10 @@ public class MessageIndexEntity {
 		receivers.remove(idReceiver);
 	}
 	
+	public boolean containsReceiver(Long idReceiver){
+		return receivers.contains(idReceiver);
+	}
+	
 	public void addAllReceivers(Collection<Long> c){
 		receivers.addAll(c);
 	}

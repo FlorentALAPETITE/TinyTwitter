@@ -35,7 +35,7 @@ public class TinyTwitterREST {
 
 	// Retourne la timeline du user "userId"
 	@ApiMethod(name = "getTimeline")
-	public List<MessageEntity> getTimeline(@Named("userId") Long userId, @Named("messageLimit") Long messageLimit) {		
+	public List<MessageEntity> getTimeline(@Named("userId") Long userId, @Named("messageLimitBegin") Long messageLimitBegin, @Named("messageLimitEnd") Long messageLimitEnd) {		
 				
 		PersistenceManager mgr = getPersistenceManager();
 		
@@ -43,7 +43,7 @@ public class TinyTwitterREST {
 
 		query.setFilter("receivers == " + userId);
 		query.setOrdering("timestamp desc");
-		query.setRange(0, messageLimit); 
+		query.setRange(messageLimitBegin, messageLimitEnd); 
 
 		List<MessageIndexEntity> userIndexes = (List<MessageIndexEntity>) query.execute();
 
@@ -58,10 +58,11 @@ public class TinyTwitterREST {
 	
 	// Renvoie la liste de tous les users
 	@ApiMethod(name="listUsers")
-	public List<UserEntity> listUsers(){
+	public List<UserEntity> listUsers(@Named("usersLimitBegin") Long usersLimitBegin,@Named("usersLimitEnd") Long usersLimitEnd){
 		PersistenceManager mgr = getPersistenceManager();
 		
 		Query users = mgr.newQuery(UserEntity.class);
+		users.setRange(usersLimitBegin, usersLimitEnd);
 		
 		return (List<UserEntity>)users.execute();
 	}
@@ -131,9 +132,11 @@ public class TinyTwitterREST {
 	@ApiMethod(name = "addFollow")
 	public UserEntity addFollow(@Named("userId") Long userId, @Named("followId") Long followId) {
 		PersistenceManager mgr = getPersistenceManager();
-		UserEntity e = mgr.getObjectById(UserEntity.class,followId);
+		UserEntity e = mgr.getObjectById(UserEntity.class,followId);		
+		e.addFollower(userId);
 		
-		e.addFollower(userId);		
+		UserEntity user = mgr.getObjectById(UserEntity.class,userId);
+		user.addFollowing(followId);		
 		
 		
 		// Rétroactivité du follow :		
@@ -144,7 +147,8 @@ public class TinyTwitterREST {
 		List<MessageIndexEntity> messageIndexEntities = (List<MessageIndexEntity>) query.execute();
 		
 		for(MessageIndexEntity m : messageIndexEntities){
-			m.addReceiver(userId);
+			if(!m.containsReceiver(userId))
+				m.addReceiver(userId);
 		}
 		
 		mgr.close();
@@ -170,6 +174,111 @@ public class TinyTwitterREST {
 		
 		return e;
 	}
+	
+	// Créé nbUsers dans le datastore (username : usernameRange + indice)
+	@ApiMethod(name = "createXUsers")
+	public UserEntity createXUsers(@Named("nbUsers") Long nbUsers, @Named("usernameRange") String usernameRange){
+		UserEntity e = new UserEntity(usernameRange);
+		
+		PersistenceManager mgr = getPersistenceManager();
+		
+		mgr.makePersistent(e);
+		
+		for(int i=1; i<nbUsers;++i){			
+			mgr.makePersistent(new UserEntity(usernameRange+(i+1)));
+		}
+		
+		return e;
+	}
+	
+	// Modifie le user (userId) pour le faire suivre par (userRangeEnd - userRangeBegin) users dans le datastore
+	@ApiMethod(name = "followUserRange")
+	public UserEntity followUserRange(@Named("userId") Long userId, @Named("userRangeBegin") Long userRangeBegin, @Named("userRangeEnd") Long userRangeEnd) throws Exception{
+		PersistenceManager mgr = getPersistenceManager();
+		
+		UserEntity e = mgr.getObjectById(UserEntity.class,userId);	
+		
+		Query userQuery = mgr.newQuery(UserEntity.class);
+		userQuery.setRange(userRangeBegin, userRangeEnd);
+		
+		List<UserEntity> users = (List<UserEntity>) userQuery.execute();		
+		
+		if(users.size()!= (userRangeEnd-userRangeBegin)){
+			throw new Exception("Unable to follow : not enough users.");
+		}
+		else{				
+			Query query;
+			List<MessageIndexEntity> messageIndexEntities;
+			
+			for(UserEntity current : users){
+								
+				e.addFollower(current.getId());
+				
+				current.addFollowing(userId);		
+				
+				
+				// Rétroactivité du follow :		
+				query = mgr.newQuery(MessageIndexEntity.class);
+		
+				query.setFilter("userId == " + userId);
+		
+				messageIndexEntities = (List<MessageIndexEntity>) query.execute();
+				
+				for(MessageIndexEntity m : messageIndexEntities){
+					if(!m.containsReceiver(current.getId()))
+						m.addReceiver(current.getId());
+				}
+			}
+		}
+		
+		mgr.close();		
+		return e;
+	}
+	
+	// Modifie le user (userId) pour qu'il suive (userRangeEnd - userRangeBegin) users dans le datastore 
+	@ApiMethod(name = "followXUsersRange")
+	public UserEntity followXUsersRange(@Named("userId") Long userId, @Named("userRangeBegin") Long userRangeBegin, @Named("userRangeEnd") Long userRangeEnd) throws Exception{
+		PersistenceManager mgr = getPersistenceManager();
+		
+		UserEntity e = mgr.getObjectById(UserEntity.class,userId);	
+		
+		Query userQuery = mgr.newQuery(UserEntity.class);
+		userQuery.setRange(userRangeBegin, userRangeEnd);
+		
+		List<UserEntity> users = (List<UserEntity>) userQuery.execute();		
+		
+		if(users.size()!= (userRangeEnd-userRangeBegin)){
+			throw new Exception("Unable to follow : not enough users.");
+		}
+		else{				
+			Query query;
+			List<MessageIndexEntity> messageIndexEntities;
+			
+			for(UserEntity current : users){
+								
+				current.addFollower(userId);
+				
+				e.addFollowing(current.getId());		
+				
+				
+				// Rétroactivité du follow :		
+				query = mgr.newQuery(MessageIndexEntity.class);
+		
+				query.setFilter("userId == " + current.getId());
+		
+				messageIndexEntities = (List<MessageIndexEntity>) query.execute();
+				
+				for(MessageIndexEntity m : messageIndexEntities){
+					if(!m.containsReceiver(userId))
+						m.addReceiver(userId);
+				}
+			}
+		}
+		
+		mgr.close();		
+		return e;
+	}
+	
 	
 	private static PersistenceManager getPersistenceManager() {
 		return PMF.get().getPersistenceManager();

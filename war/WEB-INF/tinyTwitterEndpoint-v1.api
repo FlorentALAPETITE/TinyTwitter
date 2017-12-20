@@ -28,7 +28,7 @@
   "packagePath" : "services",
   "methods" : {
     "tinyTwitterEndpoint.getTimeline" : {
-      "path" : "messageentitycollection/{userId}/{messageLimit}",
+      "path" : "messageentitycollection/{userId}/{messageLimitBegin}/{messageLimitEnd}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -41,7 +41,11 @@
             "type" : "int64",
             "required" : true
           },
-          "messageLimit" : {
+          "messageLimitBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "messageLimitEnd" : {
             "type" : "int64",
             "required" : true
           }
@@ -77,6 +81,81 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "tinyTwitterEndpoint.connectUser" : {
+      "path" : "connectUser/{username}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.connectUser",
+      "request" : {
+        "parameters" : {
+          "username" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.createXUsers" : {
+      "path" : "createXUsers/{nbUsers}/{usernameRange}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.createXUsers",
+      "request" : {
+        "parameters" : {
+          "nbUsers" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "usernameRange" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.followUserRange" : {
+      "path" : "followUserRange/{userId}/{userRangeBegin}/{userRangeEnd}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.followUserRange",
+      "request" : {
+        "parameters" : {
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "userRangeBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "userRangeEnd" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "tinyTwitterEndpoint.insertNewUser" : {
       "path" : "userentity/{username}",
       "httpMethod" : "POST",
@@ -89,6 +168,31 @@
         "parameters" : {
           "username" : {
             "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.listUsers" : {
+      "path" : "userentity/{usersLimitBegin}/{usersLimitEnd}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.listUsers",
+      "request" : {
+        "parameters" : {
+          "usersLimitBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "usersLimitEnd" : {
+            "type" : "int64",
             "required" : true
           }
         },
@@ -127,33 +231,26 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tinyTwitterEndpoint.listUsers" : {
-      "path" : "userentity",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.listUsers",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tinyTwitterEndpoint.connectUser" : {
-      "path" : "connectUser/{username}",
+    "tinyTwitterEndpoint.followXUsersRange" : {
+      "path" : "followXUsersRange/{userId}/{userRangeBegin}/{userRangeEnd}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.connectUser",
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.followXUsersRange",
       "request" : {
         "parameters" : {
-          "username" : {
-            "type" : "string",
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "userRangeBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "userRangeEnd" : {
+            "type" : "int64",
             "required" : true
           }
         },
@@ -239,6 +336,13 @@
               "format" : "int64"
             }
           },
+          "following" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "int64"
+            }
+          },
           "id" : {
             "type" : "string",
             "format" : "int64"
@@ -269,14 +373,24 @@
           "$ref" : "UserEntity"
         }
       },
-      "tinyTwitterAPI.TinyTwitterREST.insertNewUser" : {
+      "tinyTwitterAPI.TinyTwitterREST.connectUser" : {
         "response" : {
           "$ref" : "UserEntity"
         }
       },
-      "tinyTwitterAPI.TinyTwitterREST.insertNewMessage" : {
+      "tinyTwitterAPI.TinyTwitterREST.createXUsers" : {
         "response" : {
-          "$ref" : "MessageEntity"
+          "$ref" : "UserEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.followUserRange" : {
+        "response" : {
+          "$ref" : "UserEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.insertNewUser" : {
+        "response" : {
+          "$ref" : "UserEntity"
         }
       },
       "tinyTwitterAPI.TinyTwitterREST.listUsers" : {
@@ -284,7 +398,12 @@
           "$ref" : "UserEntityCollection"
         }
       },
-      "tinyTwitterAPI.TinyTwitterREST.connectUser" : {
+      "tinyTwitterAPI.TinyTwitterREST.insertNewMessage" : {
+        "response" : {
+          "$ref" : "MessageEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.followXUsersRange" : {
         "response" : {
           "$ref" : "UserEntity"
         }
