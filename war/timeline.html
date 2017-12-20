@@ -3,6 +3,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Tiny Tweet - Timeline</title>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src ="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.js"></script>
 	<script src="./static/script.js"></script>
@@ -19,7 +21,7 @@
 		<h1 class="mx-3"><a href="/timeline.html" style="text-decoration: none; color: black;">TinyTwitt</a></h1>
 		<!--div class="navbar-collapse" id="navbarText"-->
 			<ul class="navbar-nav mr-auto">
-			  <li class="nav-item active">{{username}}</li>
+			  <li class="nav-item active" ng-click="listMessages(userId=x.userId, username=x.username)" style="cursor:pointer;" title="Ma timeline">{{username}}</li>
 			</ul>
 		<!--/div-->
 
@@ -42,11 +44,13 @@
   
   <div class="form-row justify-content-md-center">
     <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
-      <h2 class="my-3">My TimeLine</h2>
+      <h2 class="my-3">{{timelineTitle}}</h2>
       
       <ul>
         <li ng-repeat="x in messages" class="card mb-1">
-          <div class="card-header text-muted">{{x.username}}</div>
+          <div class="card-header text-muted">
+	          <span ng-click="listMessages(userId=x.userId, username=x.username)" style="cursor:pointer;" title="Voir les messages de {{x.username}}">{{x.username}}</span>
+	      </div>
           <div class="card-body">{{x.message}}</div>
         </li>
       </ul>
