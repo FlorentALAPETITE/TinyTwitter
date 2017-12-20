@@ -44,17 +44,19 @@
   
   <div class="form-row justify-content-md-center">
     <div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
-      <h2 class="my-3">My timeline</h2>
+      <h2 class="my-3">My Timeline</h2>
       <p>Query executed in : {{execution_time_timeline}}ms</p>
       
       <ul>
-        <li ng-repeat="x in messages" class="card mb-1">
+        <li ng-repeat="x in messages track by $index" class="card mb-1">
           <div class="card-header text-muted">
 	          <span>{{x.username}}</span>
 	      </div>
           <div class="card-body">{{x.message}}</div>
         </li>
       </ul>
+
+      <div class="btn btn-primary" ng-click="listMessages()">Afficher 5 messages en plus</div>
     </div>
   </div>
   
