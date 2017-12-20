@@ -21,6 +21,7 @@ public class UserEntity {
 	
 	@Persistent Set<Long> followers = new HashSet<Long>();
 	
+	@Persistent Set<Long> following = new HashSet<Long>();
 	
 	public UserEntity() {}
 	
@@ -58,4 +59,13 @@ public class UserEntity {
 	public void removeFollower(Long follower) {
 		followers.remove(follower);
 	}
+	
+	public void addFollowing(Long follow) {
+		following.add(follow);
+	}
+	
+	public Set<Long> getFollowing(){
+		return following;
+	}
+	
 }
