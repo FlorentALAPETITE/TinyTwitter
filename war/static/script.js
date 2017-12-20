@@ -3,6 +3,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
   function($scope, $cookies, $cookieStore, $window) {
     $scope.messages = [];
     $scope.nbmessages = 0;
+    $scope.nbmessagestoadd = 5;
     $scope.slogin;
     $scope.spwd;
     
@@ -78,13 +79,17 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
          function(resp){
            $scope.execution_time_post = (new Date().getTime()) - timeStart;
            $scope.stext = null;
-           $scope.listMessages();
-           $scope.apply();
+           $scope.listMessages($scope.nbmessages + 1, true);
+           $scope.$apply();
          });
     }
     
-    $scope.listMessages = function(messageLimit=5){
+    $scope.listMessages = function(messageLimit=5, replace=false){
       var timeStart = new Date().getTime();
+      if (replace){
+           $scope.messages = [];
+           $scope.nbmessages = 0;
+      }
       gapi.client.tinyTwitterEndpoint.getTimeline({
         userId: $scope.userId,
         messageLimitBegin: $scope.nbmessages,
@@ -94,6 +99,9 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
           $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
 		  $scope.messages = $scope.messages.concat(resp.items);
           $scope.$apply();
+          if (resp.items.length < messageLimit){
+          	  document.getElementById('display-more-messages').style="display:none";
+          }
         });
     }
 
