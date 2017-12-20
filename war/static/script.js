@@ -58,9 +58,18 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
               $scope.username = $cookies.username = resp.username;
 			  $scope.$apply();
             }else{
-              document.getElementById('form-error').textContent = "Quelque chose est incorect."
+              document.getElementById('form-error').textContent = "Quelque chose est incorrect."
             }
          });
+    }
+
+    $scope.logout = function(){
+      $scope.redirect('/');
+
+      $scope.userId = $cookies.userId = "";
+      $scope.username = $cookies.username = "";
+	  $scope.$apply();
+
     }
     
     $scope.postMessage = function(){
