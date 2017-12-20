@@ -106,6 +106,16 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
         });
     }
 
+    $scope.listUsers = function(){
+       gapi.client.tinyTwitterEndpoint.listUsers({
+         usersLimitBegin: $scope.users.length,
+         usersLimitEnd: $scope.users.length+10,
+       }).execute(
+         function(resp){
+            // add à scope users 
+         });
+    }
+
     // little hack to be sure that apis.google.com/js/client.js is loaded
     // before calling
     // onload -> init() -> window.init() -> then here
