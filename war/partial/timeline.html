@@ -1,0 +1,48 @@
+<div class="form-row justify-content-md-center">
+	<div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
+		<h2>New Post</h2>
+		<form ng-submit="postMessage()">
+			<textarea ng-model="stext" placeholder="Twitt something ..." rows="4" maxlength="140" class="form-control"></textarea>
+			<input class="btn btn-primary form-control" type="submit" value="post" onclick="displayQueryTime();">
+		</form>
+	<p id="query_time_post" style="display:none">Query executed in : {{execution_time_post}}ms</p>
+	</div>
+</div>
+
+
+<div class="form-row justify-content-md-center">
+	<div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
+		<h2 class="my-3">My Timeline</h2>
+		<p>Query executed in : {{execution_time_timeline}}ms</p>
+		
+		<ul>
+			<li ng-repeat="x in messages track by $index" class="card mb-1">
+				<div class="card-header text-muted">
+					<span>{{x.username}}</span>
+					<span ng-if="x.userId == userId" class="btn btn-outline-secondary float-right">Vous</span>
+					<span ng-if="following.indexOf(x.userId) > -1" class="btn btn-success float-right">Followé</span>
+					<button ng-if="x.userId != userId && following.indexOf(x.id) < 0" class="btn btn-outline-success float-right" ng-click="addFollow(x.userId)">Followerer</button>
+				</div>
+
+				<div class="card-body">{{x.message}}</div>
+			</li>
+		</ul>
+
+		<div class="btn btn-outline-primary btn-block" id="display-more-messages">
+			<span ng-click="listMessages(nbmessagestoadd)" style="cursor:pointer">Afficher plus de messages : </span>
+			<select name="select-nb-messages" id="select-nb-messages" ng-model="nbmessagestoadd">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</div>
+	</div>
+</div>
+
+<script>
+	function displayQueryTime(){
+		var x = document.getElementById("query_time_post");
+		x.style.display = "block";
+	}
+</script>

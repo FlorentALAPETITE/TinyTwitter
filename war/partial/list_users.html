@@ -1,0 +1,31 @@
+<div class="form-row justify-content-md-center">
+	<div class="form-group col-xs-12 col-sm-10 col-md-6 col-lg-5">
+		<h2 class="my-3">Liste des Utilisateurs</h2>
+		
+		<ul>
+			<li ng-repeat="x in users track by $index" class="card mb-1">
+				<div class="card-header text-muted">
+					<span>{{x.username}}</span>
+					<span ng-if="x.userId == userId" class="btn btn-outline-secondary float-right">Vous</span>
+					<span ng-if="following.indexOf(x.id) > -1" class="btn btn-success float-right">Followé</span>
+					<button ng-if="x.userId != userId && following.indexOf(x.id) < 0" class="btn btn-outline-success float-right" ng-click="addFollow(x.id)">Followerer</button>
+				</div>
+
+				<ul class="card-body">
+					<li>followé par <span class="text-success">{{x.followers.length}}</span> gens</li>
+					<li>follow <span class="text-primary">{{x.following.length}}</span> gens</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="btn btn-outline-primary btn-block" id="display-more-users">
+			<span ng-click="listUsers(nbuserstoadd)" style="cursor:pointer">Afficher plus de users : </span>
+			<select name="select-nb-users" id="select-nb-users" ng-model="nbuserstoadd">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</div>
+	</div>
+</div>
