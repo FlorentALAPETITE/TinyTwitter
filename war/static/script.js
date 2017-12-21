@@ -147,11 +147,13 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
       }).execute(
         function(resp){
           // $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
-		  $scope.users = $scope.users.concat(resp.items);
-          $scope.$apply();
-          if (resp.items.length < limit){
-          	  document.getElementById('display-more-users').style="display:none";
-          }
+			if (resp.items != undefined){
+		  		$scope.users = $scope.users.concat(resp.items);
+				$scope.$apply();
+				if (resp.items.length < limit){
+					  document.getElementById('display-more-users').style="display:none";
+				}
+			} else {document.getElementById('display-more-users').style="display:none";}
         });
     }
 

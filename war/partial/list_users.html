@@ -11,10 +11,11 @@
 					<button ng-if="x.userId != userId && following.indexOf(x.id) < 0" class="btn btn-outline-success float-right" ng-click="addFollow(x.id)">Follow</button>
 				</div>
 
-				<ul class="card-body">
-					<li>followé par <span class="text-success">{{x.followers.length}}</span> gens</li>
-					<li>follow <span class="text-primary">{{x.following.length}}</span> gens</li>
-				</ul>
+				<div class="card-body">
+					<span>Follow <span class="text-primary">{{x.following.length}}</span> compte<span ng-show="x.following.length > 1">s</span>
+					<span ng-show="x.userId != userId && x.following.indexOf(userId) > -1" class="text-success">dont moi !</span>
+				</span>
+				</div>
 			</li>
 		</ul>
 
