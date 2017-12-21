@@ -21,7 +21,7 @@
 					<span>{{x.username}}</span>
 					<span ng-if="x.userId == userId" class="btn btn-outline-secondary float-right">Vous</span>
 					<span ng-if="following.indexOf(x.userId) > -1" class="btn btn-success float-right">Followé</span>
-					<button ng-if="x.userId != userId && following.indexOf(x.id) < 0" class="btn btn-outline-success float-right" ng-click="addFollow(x.userId)">Followerer</button>
+					<button ng-if="x.userId != userId && following.indexOf(x.userId) < 0" class="btn btn-outline-success float-right" ng-click="addFollow(x.userId)">Followerer</button>
 				</div>
 
 				<div class="card-body">{{x.message}}</div>
