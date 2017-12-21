@@ -1,10 +1,12 @@
 var user;
 var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$scope', '$cookies', '$cookieStore', '$window',
   function($scope, $cookies, $cookieStore, $window) {
-    $scope.messages;
-    $scope.nbmessages = 0;
+    $scope.messages = [];
+    $scope.nbmessagestoadd = 5;
     $scope.slogin;
     $scope.spwd;
+
+    $scope.following = [];
     
     $scope.slogin_reg;
     $scope.spwd_reg;
@@ -14,8 +16,6 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     
     $scope.userId = $cookies.userId;
     $scope.username = $cookies.username;
-
-    $scope.timelineTitle = "My timeline";
 
     $scope.execution_time_timeline;
     $scope.execution_time_post;
@@ -80,40 +80,29 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
          function(resp){
            $scope.execution_time_post = (new Date().getTime()) - timeStart;
            $scope.stext = null;
-           $scope.listMessages();
-           $scope.apply();
+           $scope.listMessages($scope.messages.length + 1, true);
+           $scope.$apply();
          });
     }
     
-    $scope.listMessages = function(userId=$scope.userId, username=$scope.username, messageLimit=5, replace=true){
+    $scope.listMessages = function(messageLimit=5, replace=false){
       var timeStart = new Date().getTime();
+      if (replace){
+           $scope.messages = [];
+      }
       gapi.client.tinyTwitterEndpoint.getTimeline({
-        userId: userId,
-        messageLimit: messageLimit,
-        messageLimitBegin: $scope.nbmessages,
-        messageLimitEnd: $scope.nbmessages += messageLimit
+        userId: $scope.userId,
+        messageLimitBegin: $scope.messages.length,
+        messageLimitEnd: $scope.messages.length + parseInt(messageLimit)
       }).execute(
         function(resp){
           $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
-        	if (replace){
-        		// changement de timeline
-          		$scope.messages = resp.items;
-          		$scope.timelineTitle = username == $scope.username ? "My timeline" : username + "'s timeline";
-        	} else {
-        		$scope.messages += resp.items;
-        	}
+		  $scope.messages = $scope.messages.concat(resp.items);
           $scope.$apply();
+          if (resp.items.length < messageLimit){
+          	  document.getElementById('display-more-messages').style="display:none";
+          }
         });
-    }
-
-    $scope.listUsers = function(){
-       gapi.client.tinyTwitterEndpoint.listUsers({
-         usersLimitBegin: $scope.users.length,
-         usersLimitEnd: $scope.users.length+10,
-       }).execute(
-         function(resp){
-            // add à scope users 
-         });
     }
 
     // little hack to be sure that apis.google.com/js/client.js is loaded
