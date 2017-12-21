@@ -30,6 +30,22 @@ public class UserEntity {
 		idUser = null;		
 	}
 	
+	public Long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
+	}
+
+	public void setFollowers(Set<Long> followers) {
+		this.followers = followers;
+	}
+
+	public void setFollowing(Set<Long> following) {
+		this.following = following;
+	}
+		
 		
 	public Long getId() {
 		return idUser;
