@@ -31,3 +31,8 @@ h1{
 .register_div{
 	text-align:right;
 }
+
+.navbar-nav li {
+	width: 100%;
+	text-align: center;
+}

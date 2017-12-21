@@ -25,6 +25,8 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
     $scope.execution_time_timeline;
     $scope.execution_time_post;
 
+    $scope.timeline=false;
+
 	$scope.redirect = function(template){
 		var url = document.URL;
 		var host = url.substring(0,url.lastIndexOf("/"));
@@ -34,6 +36,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
 
 	$scope.setComponent = function(component) {
 		$scope.component = component;
+    $scope.timeline = !$scope.timeline;
 		switch(component){
 			case 'timeline': $scope.listMessages(5, replace=true);
 			case 'list_users': $scope.listUsers(5, replace=true);
@@ -133,7 +136,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
         });
     }
     
-    $scope.listUsers = function(limit=5, replace=true){
+    $scope.listUsers = function(limit=5, replace=false){
       // var timeStart = new Date().getTime();
       if (replace){
            $scope.users = [];
