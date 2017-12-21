@@ -133,7 +133,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
         });
     }
     
-    $scope.listUsers = function(limit=5, replace=true){
+    $scope.listUsers = function(limit=5, replace=false){
       // var timeStart = new Date().getTime();
       if (replace){
            $scope.users = [];
