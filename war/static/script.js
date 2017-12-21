@@ -124,12 +124,14 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
         messageLimitEnd: $scope.messages.length + parseInt(messageLimit)
       }).execute(
         function(resp){
-          $scope.execution_time_timeline = (new Date().getTime()) - timeStart;
-		  $scope.messages = $scope.messages.concat(resp.items);
-          $scope.$apply();
-          if (resp.items.length < messageLimit){
-          	  document.getElementById('display-more-messages').style="display:none";
-          }
+			$scope.execution_time_timeline = (new Date().getTime()) - timeStart;
+			if (resp.items != undefined){
+			  $scope.messages = $scope.messages.concat(resp.items);
+				if (resp.items.length < messageLimit){
+					  document.getElementById('display-more-messages').style="display:none";
+				}
+			}
+			$scope.$apply();
         });
     }
     
