@@ -19,8 +19,10 @@ public class UserEntity {
 	
 	@Index @Persistent String username;
 	
+	// On conserve les followers du user pour mettre à jour les receivers en cas d'écriture de message
 	@Persistent Set<Long> followers = new HashSet<Long>();
 	
+	// On conserve les personnes follows par le user pour éviter les requêtes superflues côté client (recherche de toutes les personnes que le user follow)
 	@Persistent Set<Long> following = new HashSet<Long>();
 	
 	public UserEntity() {}

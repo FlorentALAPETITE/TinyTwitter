@@ -21,6 +21,8 @@ public class MessageIndexEntity {
 	
 	@Persistent MessageEntity messageEntity;
 	@Persistent Set<Long> receivers = new HashSet<Long>();
+	
+	// On sort le timestamp et le userId du message en lui même pour pouvoir query dessus
 	@Index @Persistent String timestamp;	
 	@Index @Persistent Long userId;
 	

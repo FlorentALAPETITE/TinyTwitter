@@ -27,135 +27,6 @@
   "ownerName" : "TinyTwitter.com",
   "packagePath" : "services",
   "methods" : {
-    "tinyTwitterEndpoint.getTimeline" : {
-      "path" : "messageentitycollection/{userId}/{messageLimitBegin}/{messageLimitEnd}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.getTimeline",
-      "request" : {
-        "parameters" : {
-          "userId" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "messageLimitBegin" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "messageLimitEnd" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tinyTwitterEndpoint.listUsers" : {
-      "path" : "userentity/{usersLimitBegin}/{usersLimitEnd}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.listUsers",
-      "request" : {
-        "parameters" : {
-          "usersLimitBegin" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "usersLimitEnd" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tinyTwitterEndpoint.insertNewMessage" : {
-      "path" : "messageentity/{message}/{userId}/{username}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewMessage",
-      "request" : {
-        "parameters" : {
-          "message" : {
-            "type" : "string",
-            "required" : true
-          },
-          "userId" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "username" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tinyTwitterEndpoint.insertNewUser" : {
-      "path" : "userentity/{username}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewUser",
-      "request" : {
-        "parameters" : {
-          "username" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tinyTwitterEndpoint.addFollow" : {
-      "path" : "addFollow/{userId}/{followId}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.addFollow",
-      "request" : {
-        "parameters" : {
-          "userId" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "followId" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "tinyTwitterEndpoint.connectUser" : {
       "path" : "connectUser/{username}",
       "httpMethod" : "POST",
@@ -231,6 +102,110 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "tinyTwitterEndpoint.listUsers" : {
+      "path" : "userentity/{usersLimitBegin}/{usersLimitEnd}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.listUsers",
+      "request" : {
+        "parameters" : {
+          "usersLimitBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "usersLimitEnd" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.insertNewMessage" : {
+      "path" : "messageentity/{message}/{userId}/{username}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewMessage",
+      "request" : {
+        "parameters" : {
+          "message" : {
+            "type" : "string",
+            "required" : true
+          },
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "username" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.getTimeline" : {
+      "path" : "messageentitycollection/{userId}/{messageLimitBegin}/{messageLimitEnd}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.getTimeline",
+      "request" : {
+        "parameters" : {
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "messageLimitBegin" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "messageLimitEnd" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tinyTwitterEndpoint.insertNewUser" : {
+      "path" : "userentity/{username}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.insertNewUser",
+      "request" : {
+        "parameters" : {
+          "username" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "tinyTwitterEndpoint.followXUsersRange" : {
       "path" : "followXUsersRange/{userId}/{userRangeBegin}/{userRangeEnd}",
       "httpMethod" : "POST",
@@ -259,10 +234,78 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "tinyTwitterEndpoint.addFollow" : {
+      "path" : "addFollow/{userId}/{followId}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "tinyTwitterAPI.TinyTwitterREST.addFollow",
+      "request" : {
+        "parameters" : {
+          "userId" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "followId" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "UserEntity" : {
+        "id" : "UserEntity",
+        "type" : "object",
+        "properties" : {
+          "idUser" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "followers" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "int64"
+            }
+          },
+          "following" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "int64"
+            }
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "UserEntityCollection" : {
+        "id" : "UserEntityCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "UserEntity"
+            }
+          }
+        }
+      },
       "MessageEntity" : {
         "id" : "MessageEntity",
         "type" : "object",
@@ -321,77 +364,9 @@
             }
           }
         }
-      },
-      "UserEntity" : {
-        "id" : "UserEntity",
-        "type" : "object",
-        "properties" : {
-          "idUser" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "username" : {
-            "type" : "string"
-          },
-          "followers" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "format" : "int64"
-            }
-          },
-          "following" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "format" : "int64"
-            }
-          },
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          }
-        }
-      },
-      "UserEntityCollection" : {
-        "id" : "UserEntityCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "UserEntity"
-            }
-          }
-        }
       }
     },
     "methods" : {
-      "tinyTwitterAPI.TinyTwitterREST.getTimeline" : {
-        "response" : {
-          "$ref" : "MessageEntityCollection"
-        }
-      },
-      "tinyTwitterAPI.TinyTwitterREST.listUsers" : {
-        "response" : {
-          "$ref" : "UserEntityCollection"
-        }
-      },
-      "tinyTwitterAPI.TinyTwitterREST.insertNewMessage" : {
-        "response" : {
-          "$ref" : "MessageEntity"
-        }
-      },
-      "tinyTwitterAPI.TinyTwitterREST.insertNewUser" : {
-        "response" : {
-          "$ref" : "UserEntity"
-        }
-      },
-      "tinyTwitterAPI.TinyTwitterREST.addFollow" : {
-        "response" : {
-          "$ref" : "UserEntity"
-        }
-      },
       "tinyTwitterAPI.TinyTwitterREST.connectUser" : {
         "response" : {
           "$ref" : "UserEntity"
@@ -407,7 +382,32 @@
           "$ref" : "UserEntity"
         }
       },
+      "tinyTwitterAPI.TinyTwitterREST.listUsers" : {
+        "response" : {
+          "$ref" : "UserEntityCollection"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.insertNewMessage" : {
+        "response" : {
+          "$ref" : "MessageEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.getTimeline" : {
+        "response" : {
+          "$ref" : "MessageEntityCollection"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.insertNewUser" : {
+        "response" : {
+          "$ref" : "UserEntity"
+        }
+      },
       "tinyTwitterAPI.TinyTwitterREST.followXUsersRange" : {
+        "response" : {
+          "$ref" : "UserEntity"
+        }
+      },
+      "tinyTwitterAPI.TinyTwitterREST.addFollow" : {
         "response" : {
           "$ref" : "UserEntity"
         }

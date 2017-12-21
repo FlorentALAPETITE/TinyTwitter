@@ -18,7 +18,7 @@ public class MessageEntity {
 	
 	@Persistent String message;	
 	
-	// On conserve l'ID et l'username pour éviter les queries superflues (getUsername par exemples)
+	// On conserve l'ID et l'username pour éviter les queries superflues (getUsername par exemple)
 	// --> Perte d'espace mais gain de temps d'execution
 	@Persistent String username;	
 	@Persistent Long userId;
