@@ -68,7 +68,7 @@ var app = angular.module('twitt', ['ngCookies']).controller('TTController', ['$s
 
               $scope.userId = $cookies.userId = resp.id;
               $scope.username = $cookies.username = resp.username;
-              $scope.following = resp.following;
+              $scope.following = $cookies.following = resp.following;
 			  $scope.$apply();
             }else{
               document.getElementById('form-error').textContent = "Quelque chose est incorrect."
