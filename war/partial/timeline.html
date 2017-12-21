@@ -3,9 +3,9 @@
 		<h2>New Post</h2>
 		<form ng-submit="postMessage()">
 			<textarea ng-model="stext" placeholder="Twitt something ..." rows="4" maxlength="140" class="form-control"></textarea>
-			<input class="btn btn-primary form-control" type="submit" value="post" onclick="displayQueryTime();">
+			<input class="btn btn-primary form-control" type="submit" value="post">
 		</form>
-	<p id="query_time_post" style="display:none">Query executed in : {{execution_time_post}}ms</p>
+	<p id="query_time_post" ng-show="execution_time_post">Query executed in : {{execution_time_post}}ms</p>
 	</div>
 </div>
 
@@ -39,10 +39,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	function displayQueryTime(){
-		var x = document.getElementById("query_time_post");
-		x.style.display = "block";
-	}
-</script>
