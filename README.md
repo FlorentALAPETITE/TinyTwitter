@@ -103,3 +103,10 @@ Retourne la liste de tous les utilisateurs (limités par **usersLimitBegin** et 
 | 50 messages | 251 ms | 2589 |
 | 100 messages | 270 ms | 3470 |
 
+# Auteurs :
+
+* ALAPETITE Florent
+* BELLOT Roxane
+* BOUDINE Alexandre
+* GAILLARD Florent
+
