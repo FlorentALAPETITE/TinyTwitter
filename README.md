@@ -1,9 +1,10 @@
+
 # Liens utiles :
 
-* Lien du client : http://tinytwitter-189016.appspot.com/
-Pour se connecter : renseigner le champ "Login" avec un nom d'utilisateur valide (possibilité d'en créer un nouveau via "Pas encore membre ?"). Les champs "Password" sont inutiles.
+* [Notre client](http://tinytwitter-189016.appspot.com/)
+Pour se connecter : renseigner le champ *Login* avec un nom d'utilisateur valide (possibilité d'en créer un nouveau via *Pas encore membre ?*). Les champs *Password* sont inutiles.
 
-* Lien de l'API explorer : https://apis-explorer.appspot.com/apis-explorer/?base=https://tinytwitter-189016.appspot.com/_ah/api#p/
+* [API explorer](https://apis-explorer.appspot.com/apis-explorer/?base=https://tinytwitter-189016.appspot.com/_ah/api#p/)
 
 
 # Méthodes de l'API REST :
@@ -39,7 +40,7 @@ Ajoute un nouveau user dans le datastore (**username** est unique).
 
 ## listUsers(Long usersLimitBegin, Long usersLimitEnd)
 Retourne la liste de tous les utilisateurs (limités par **usersLimitBegin** et **usersLimitEnd**).
-
+ 
 
 # Tests de performance :
 
@@ -57,14 +58,11 @@ Retourne la liste de tous les utilisateurs (limités par **usersLimitBegin** et 
 
 * Conditions du test : un user qui follow 2800 personnes
 
-* Moyenne des temps d'execution pour 100 messages : 1780 ms
-* Variance : 268891
-
-* Moyenne des temps d'execution pour 50 messages : 1550 ms
-* Variance : 37030
-
-* Moyenne des temps d'execution pour 10 messages : 297 ms
-* Variance : 14804
+| Taille de la timeline  | Moyenne des temps d’exécution | Variance |
+| --- | --- | --- |
+| 10 messages | 297 ms | 14804 |
+| 50 messages | 1550 ms | 37030 |
+| 100 messages | 1780 ms | 268891 |
 
 
 ## Test 2 : datastore contenant 1000 users 
@@ -79,14 +77,12 @@ Retourne la liste de tous les utilisateurs (limités par **usersLimitBegin** et 
 
 * Conditions du test : un user qui follow 1000 personnes
 
-* Moyenne des temps d'execution pour 100 messages : 1136 ms
-* Variance : 217630
 
-* Moyenne des temps d'execution pour 50 messages : 765 ms
-* Variance : 78401
-
-* Moyenne des temps d'execution pour 10 messages : 398 ms
-* Variance : 10568
+| Taille de la timeline  | Moyenne des temps d’exécution | Variance |
+| --- | --- | --- |
+| 10 messages | 398 ms | 10568 |
+| 50 messages | 765 ms | 78401 |
+| 100 messages | 1136 ms | 217630 |
 
 
 ## Test 3 : datastore contenant 100 users 
@@ -101,12 +97,16 @@ Retourne la liste de tous les utilisateurs (limités par **usersLimitBegin** et 
 
 * Conditions du test : un user qui follow 100 personnes
 
-* Moyenne des temps d'execution pour 100 messages : 270 ms
-* Variance : 3470
+| Taille de la timeline  | Moyenne des temps d’exécution | Variance |
+| --- | --- | --- |
+| 10 messages | 241 ms | 1935 |
+| 50 messages | 251 ms | 2589 |
+| 100 messages | 270 ms | 3470 |
 
-* Moyenne des temps d'execution pour 50 messages : 251 ms
-* Variance : 2589
+# Auteurs :
 
-* Moyenne des temps d'execution pour 10 messages : 241 ms
-* Variance : 1935
+* ALAPETITE Florent
+* BELLOT Roxane
+* BOUDINE Alexandre
+* GAILLARD Florent
 
